@@ -1,0 +1,9 @@
+host: ff.local
+image:
+  repository: true-feature-flag/
+
+imagePullSecrets:
+  name: dockercred
+
+ingress:
+  class: nginx

@@ -1,0 +1,21 @@
+{
+  "test.flag.enabled":
+      {
+        "uid": "test.flag.enabled",
+        "enable": true,
+        "description": "ST-402 Отображение статуса ЧЛП",
+        "group": "ST-402 Отображение статуса ЧЛП",
+        "permissions": [],
+        "customProperties": {
+          "sprint": "Sprint 95",
+          "tag": "srtgerhe",
+          "type": "RELEASE"
+        },
+        "flippingStrategy": {
+          "className": "org.ff4j.strategy.time.ReleaseDateFlipStrategy",
+          "initParams": {
+            "releaseDate": "2020-01-01-00:00"
+          }
+        }
+      }
+}

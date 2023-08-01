@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: feature-flag-store
+  labels:
+    app: true-feature-flag
+data:
+  "test.flag.enabled": |
+    {"uid":"enable.portal.trace.id.header","enable":true,"description":"Передача traceId","permissions":[],"customProperties":{"type":"SYSTEM"}}

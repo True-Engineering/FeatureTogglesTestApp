@@ -1,0 +1,1 @@
+### Тестовое приложение для проверки TE_FeatureTogglesSDK_Java

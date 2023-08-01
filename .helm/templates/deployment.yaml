@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feature-flag-test-app
+  labels:
+    app: true-feature-flag
+spec:
+  selector:
+    matchLabels:
+      app: feature-flag-test-app
+  replicas: 1
+  template:
+    metadata:
+      name: feature-flag-test-app
+      labels:
+        app: feature-flag-test-app
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets.name }}
+        - name: docker-auth-{{ .Release.Name }}
+      containers:
+        - name: feature-flag-test-app
+          image: {{ .Values.image.repository }}feature-flag-test-app:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          livenessProbe:
+            httpGet:
+              path: {{.Values.actuatorPath}}
+              port: 8500
+            initialDelaySeconds: {{.Values.livenessProbeTime.small.initialDelaySeconds}}
+            periodSeconds: {{.Values.livenessProbeTime.periodSeconds}}
+            timeoutSeconds: {{.Values.livenessProbeTime.timeoutSeconds}}
+            failureThreshold: {{.Values.livenessProbeTime.failureThreshold}}
+          readinessProbe:
+            httpGet:
+              path: {{.Values.actuatorPath}}
+              port: 8500
+            initialDelaySeconds: {{.Values.readinessProbeTime.small.initialDelaySeconds}}
+            periodSeconds: {{.Values.readinessProbeTime.periodSeconds}}
+            timeoutSeconds: {{.Values.readinessProbeTime.timeoutSeconds}}
+            failureThreshold: {{.Values.readinessProbeTime.failureThreshold}}
+      serviceAccountName: api-reader

@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: feature-flag-test-app
+  labels:
+    app: true-feature-flag
+spec:
+  rules:
+    - host: ff.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: feature-flag-test-app
+              servicePort: 8500
