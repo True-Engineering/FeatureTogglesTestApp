@@ -11,7 +11,7 @@ ext {
 }
 
 group = 'ru.trueengineering'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '11'
 
 configurations {
@@ -21,11 +21,14 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
-	mavenLocal()
-	repositories {
-		mavenCentral()
-	}
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/True-Engineering/FeatureTogglesSDK_Java")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+   }
 }
 
 dependencies {
@@ -35,7 +38,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation "ru.trueengineering:feature-flags:0.1.0"
+    implementation "ru.trueengineering:feature-flags:0.0.1"
+    implementation "ru.trueengineering:feature-flag-sdk-core:0.0.1"
 }
 
 dependencyManagement {
